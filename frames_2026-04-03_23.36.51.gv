@@ -1,0 +1,16 @@
+digraph G {
+"tb3_0/base_footprint" -> "tb3_0/base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"tb3_0/odom" -> "tb3_0/base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 3.873\nBuffer length: 4.906\nMost recent transform: 1775252210.88899\nOldest transform: 1775252205.983325\n"];
+"tb3_0/base_link" -> "tb3_0/caster_back_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"tb3_0/base_link" -> "tb3_0/imu_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"tb3_0/base_link" -> "tb3_0/base_scan"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"tb3_0/base_link" -> "tb3_0/wheel_left_link"[label=" Broadcaster: default_authority\nAverage rate: 3.873\nBuffer length: 4.906\nMost recent transform: 1775252210.88899\nOldest transform: 1775252205.983325\n"];
+"tb3_0/base_link" -> "tb3_0/wheel_right_link"[label=" Broadcaster: default_authority\nAverage rate: 3.873\nBuffer length: 4.906\nMost recent transform: 1775252210.88899\nOldest transform: 1775252205.983325\n"];
+"tb3_1/odom" -> "tb3_1/base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 3.873\nBuffer length: 4.906\nMost recent transform: 1775252210.889668\nOldest transform: 1775252205.984167\n"];
+"tb3_1/base_link" -> "tb3_1/wheel_left_link"[label=" Broadcaster: default_authority\nAverage rate: 3.873\nBuffer length: 4.906\nMost recent transform: 1775252210.889668\nOldest transform: 1775252205.984167\n"];
+"tb3_1/base_link" -> "tb3_1/wheel_right_link"[label=" Broadcaster: default_authority\nAverage rate: 3.873\nBuffer length: 4.906\nMost recent transform: 1775252210.889668\nOldest transform: 1775252205.984167\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1775252211.0242867"[ shape=plaintext ] ;
+}->"tb3_1/base_link";
+}

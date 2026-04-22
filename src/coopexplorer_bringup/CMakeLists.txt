@@ -22,7 +22,22 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}
+)
+install(DIRECTORY config/
+  DESTINATION share/${PROJECT_NAME}/config
+)
+
+install(DIRECTORY maps/
+  DESTINATION share/${PROJECT_NAME}/maps
+)
+
+install(DIRECTORY launch/
+  DESTINATION share/${PROJECT_NAME}/launch
+)
+install(DIRECTORY rviz/
+  DESTINATION share/${PROJECT_NAME}/rviz
 )
 ament_package()
