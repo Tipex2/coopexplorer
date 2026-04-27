@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+		'frontier_detector = coopexplorer_exploration.frontier_detector:main',
         ],
     },
 )

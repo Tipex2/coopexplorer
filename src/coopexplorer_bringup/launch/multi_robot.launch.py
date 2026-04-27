@@ -30,7 +30,12 @@ def generate_launch_description():
         'config', 'slam_toolbox_tb3_0.yaml'
     )
 
-    nav2_params = os.path.join(
+    nav2_params_tb3_0 = os.path.join(
+        get_package_share_directory('coopexplorer_bringup'),
+        'config', 'nav2_params_tb3_0.yaml'
+    )
+
+    nav2_params_tb3_1 = os.path.join(
         get_package_share_directory('coopexplorer_bringup'),
         'config', 'nav2_params_tb3_1.yaml'
     )
@@ -111,19 +116,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    nav2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            os.path.join(
-                get_package_share_directory('nav2_bringup'),
-                'launch', 'navigation_launch.py'
-            )
-        ]),
-        launch_arguments={
-            'use_sim_time': 'true',
-            'params_file': nav2_params
-        }.items()
-    )
-
     lifecycle_manager = Node(
         package='nav2_lifecycle_manager',
         executable='lifecycle_manager',
@@ -132,6 +124,31 @@ def generate_launch_description():
             'use_sim_time': True,
             'autostart': True,
             'node_names': ['map_server', 'amcl']
+        }],
+        output='screen'
+    )
+
+    nav2_tb3_0 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            os.path.join(
+                get_package_share_directory('nav2_bringup'),
+                'launch', 'navigation_launch.py'
+            )
+        ]),
+        launch_arguments={
+            'use_sim_time': 'false',
+            'params_file': nav2_params_tb3_0
+        }.items()
+    )
+
+    frontier_detector = Node(
+        package='coopexplorer_exploration',
+        executable='frontier_detector',
+        name='frontier_detector',
+        parameters=[{
+            'robot_namespace': 'tb3_0',
+            'min_frontier_size': 5,
+            'use_sim_time': False
         }],
         output='screen'
     )
@@ -155,14 +172,17 @@ def generate_launch_description():
             lifecycle_manager,
         ]),
 
-        TimerAction(period=20.0, actions=[nav2]),
-	TimerAction(period=20.0, actions=[
-    		ExecuteProcess(
-      		  cmd=['rviz2', '-d', os.path.join(
-      		      get_package_share_directory('coopexplorer_bringup'),
-      		      'rviz', 'coopexplorer.rviz'
-     		   )],
-      		  output='screen'
-   		 )
-		]),
+        TimerAction(period=22.0, actions=[nav2_tb3_0]),
+
+        TimerAction(period=35.0, actions=[frontier_detector]),
+
+        TimerAction(period=20.0, actions=[
+            ExecuteProcess(
+                cmd=['rviz2', '-d', os.path.join(
+                    get_package_share_directory('coopexplorer_bringup'),
+                    'rviz', 'coopexplorer.rviz'
+                )],
+                output='screen'
+            )
+        ]),
     ])
